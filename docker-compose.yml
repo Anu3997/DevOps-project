@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  app: 
+    build: .
+    container_name: devops_app
+    environment:
+      - APP_VERSION=v1
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:latest
+    container_name: devops_mongo
+    ports:
+      - "27017:27017"

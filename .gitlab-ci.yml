@@ -1,0 +1,31 @@
+image: docker:latest
+services:
+  - docker:dind
+
+variables:
+  IMAGE_NAME: "devops-app"
+  IMAGE_TAG: "v1"
+
+stages:
+  - build
+  - docker
+  - deploy
+
+build-job:
+  stage: build
+  script: 
+    - echo "Building in prgress...."
+
+docker-job:
+  stage: docker
+  script:
+    - echo "Docker in progress...."
+    - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+
+deploy_stage:
+  stage: deploy
+  script:
+    - echo "Deploying in progress.... $IMAGE_NAME:$IMAGE_TAG"
+  only:
+    - main
+  when: manual
